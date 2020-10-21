@@ -1,12 +1,12 @@
-﻿using FoodCleanB.Database;
-using FoodCleanB.Helpers;
+﻿using ThietBiBosch.Database;
+using ThietBiBosch.Helpers;
 using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Web.Mvc;
 
-namespace FoodCleanB.Controllers
+namespace ThietBiBosch.Controllers
 {
     [Login]
     [Admin]

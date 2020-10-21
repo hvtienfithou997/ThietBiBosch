@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FoodCleanB.Database
+namespace ThietBiBosch.Database
 {
     using System;
     using System.Data.Entity;

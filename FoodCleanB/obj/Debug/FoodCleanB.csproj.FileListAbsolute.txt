@@ -190,3 +190,7 @@ C:\Users\Tien Hoang\Desktop\CDTN-master - Copy\FoodCleanB\obj\Debug\FoodCleanB.c
 C:\Users\Tien Hoang\Desktop\CDTN-master - Copy\FoodCleanB\obj\Debug\FoodCleanB.csproj.CopyComplete
 C:\Users\Tien Hoang\Desktop\CDTN-master - Copy\FoodCleanB\obj\Debug\FoodCleanB.dll
 C:\Users\Tien Hoang\Desktop\CDTN-master - Copy\FoodCleanB\obj\Debug\FoodCleanB.pdb
+C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\obj\Debug\FoodCleanB.csprojAssemblyReference.cache
+C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\obj\Debug\FoodCleanB.csproj.CoreCompileInputs.cache
+C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\obj\Debug\FoodCleanB.dll
+C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\obj\Debug\FoodCleanB.pdb

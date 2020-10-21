@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace FoodCleanB.Helpers
+namespace ThietBiBosch.Helpers
 {
     public static class EncryptHelper
     {

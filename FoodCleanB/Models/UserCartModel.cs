@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FoodCleanB.Models
+namespace ThietBiBosch.Models
 {
     public class UserCartItemModel
     {

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 
-namespace FoodCleanB.Controllers
+namespace ThietBiBosch.Controllers
 {
     public class HomeController : BaseController
     {
@@ -11,7 +11,10 @@ namespace FoodCleanB.Controllers
             return View();
         }
 
-        
+        public ActionResult Home()
+        {
+            return View();
+        }
 
     }
 }

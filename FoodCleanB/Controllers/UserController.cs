@@ -1,12 +1,12 @@
-﻿using FoodCleanB.Database;
-using FoodCleanB.Helpers;
-using FoodCleanB.Models;
+﻿using ThietBiBosch.Database;
+using ThietBiBosch.Helpers;
+using ThietBiBosch.Models;
 using System;
 using System.Linq;
 using System.Web.Mvc;
 using WebGrease.Css.Extensions;
 
-namespace FoodCleanB.Controllers
+namespace ThietBiBosch.Controllers
 {
     [LoginAttribute]
     [RoutePrefix("tai-khoan")]

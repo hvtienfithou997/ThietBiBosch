@@ -5,7 +5,7 @@ using System.Web;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace FoodCleanB.Models
+namespace ThietBiBosch.Models
 {
     public class LoginModel
     {

@@ -1,9 +1,9 @@
-﻿using FoodCleanB.Database;
+﻿using ThietBiBosch.Database;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
-namespace FoodCleanB.Controllers
+namespace ThietBiBosch.Controllers
 {
     public class SanPhamController : BaseController
     {

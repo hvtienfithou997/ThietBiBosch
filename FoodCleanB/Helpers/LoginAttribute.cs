@@ -1,8 +1,8 @@
-﻿using FoodCleanB.Database;
+﻿using ThietBiBosch.Database;
 using System.Linq;
 using System.Web.Mvc;
 
-namespace FoodCleanB.Helpers
+namespace ThietBiBosch.Helpers
 {
     public class GetSessionAttribute : ActionFilterAttribute, IActionFilter
     {

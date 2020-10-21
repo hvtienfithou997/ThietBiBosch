@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace FoodCleanB.Controllers
+namespace ThietBiBosch.Controllers
 {
     public class AboutController : BaseController
     {

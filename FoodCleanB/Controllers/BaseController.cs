@@ -1,8 +1,8 @@
 ﻿using System.Web.Mvc;
-using FoodCleanB.Database;
-using FoodCleanB.Helpers;
+using ThietBiBosch.Database;
+using ThietBiBosch.Helpers;
 
-namespace FoodCleanB.Controllers
+namespace ThietBiBosch.Controllers
 {
     [GetSession]
     public class BaseController : Controller

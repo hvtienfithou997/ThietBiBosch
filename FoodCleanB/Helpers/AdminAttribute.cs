@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Web.Mvc;
-using FoodCleanB.Database;
+using ThietBiBosch.Database;
 
-namespace FoodCleanB.Helpers
+namespace ThietBiBosch.Helpers
 {
     public class AdminAttribute : ActionFilterAttribute, IActionFilter
     {

@@ -1,12 +1,12 @@
-﻿using FoodCleanB.Database;
-using FoodCleanB.Helpers;
-using FoodCleanB.Models;
+﻿using ThietBiBosch.Database;
+using ThietBiBosch.Helpers;
+using ThietBiBosch.Models;
 using System;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace FoodCleanB.Controllers
+namespace ThietBiBosch.Controllers
 {
     public class LoginController : BaseController
     {

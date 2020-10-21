@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace FoodCleanB.Models
+namespace ThietBiBosch.Models
 {
     public class NhanVienModel
     {
@@ -13,5 +13,13 @@ namespace FoodCleanB.Models
         public string SDT { get; set; }
         public string DiaChi { get; set; }
         public string ChucVu { get; set; }
+    }
+
+    public class Utils
+    {
+        public static string addNode(string node, string str)
+        {
+            return String.Format("<{0}>{1}</{0}>", node, str);
+        }
     }
 }

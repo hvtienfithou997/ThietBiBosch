@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ThietBiNoiThatModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ChiTietPhieuNhap">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="MaPhieuNhap" Type="varchar" MaxLength="50" />
+    <Property Name="DonGiaNhap" Type="int" />
+    <Property Name="SoLuongNhap" Type="nchar" MaxLength="10" />
+    <Property Name="MaThietBi" Type="nchar" MaxLength="10" />
+    <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DanhMucThietBi">
+    <Key>
+      <PropertyRef Name="MaDMTB" />
+    </Key>
+    <Property Name="MaDMTB" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="TenDMTB" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="NhanVien">
+    <Key>
+      <PropertyRef Name="MaNhanVien" />
+    </Key>
+    <Property Name="MaNhanVien" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="TenNhanVien" Type="nvarchar" MaxLength="100" />
+    <Property Name="GioiTinh" Type="bit" />
+    <Property Name="SDT" Type="char" MaxLength="11" />
+    <Property Name="DiaChi" Type="nvarchar" MaxLength="200" />
+    <Property Name="ChucVu" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="PhieuNhap">
+    <Key>
+      <PropertyRef Name="MaPhieuNhap" />
+    </Key>
+    <Property Name="MaPhieuNhap" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="NgayNhap" Type="datetime" />
+    <Property Name="MaNhanVien" Type="varchar" MaxLength="50" />
+    <Property Name="SoLuong" Type="nchar" MaxLength="10" />
+    <Property Name="DonGia" Type="nchar" MaxLength="10" />
+    <Property Name="MaThietBi" Type="varchar" MaxLength="50" />
+    <Property Name="TenThietBi" Type="nvarchar" MaxLength="100" />
+    <Property Name="DonViTinh" Type="char" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="TaiKhoan">
+    <Key>
+      <PropertyRef Name="MaTaiKhoan" />
+    </Key>
+    <Property Name="MaTaiKhoan" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="TenDangNhap" Type="varchar" MaxLength="20" />
+    <Property Name="MatKhau" Type="varchar" MaxLength="20" />
+    <Property Name="MaNhanVien" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ThietBi">
+    <Key>
+      <PropertyRef Name="MaThietBi" />
+    </Key>
+    <Property Name="MaThietBi" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="TenThietBi" Type="nvarchar" MaxLength="100" />
+    <Property Name="GiaThanh" Type="int" />
+    <Property Name="GiaKhuyenMai" Type="int" />
+    <Property Name="MoTa" Type="ntext" />
+    <Property Name="AnhSanPham" Type="text" />
+    <Property Name="SoLuong" Type="int" />
+    <Property Name="MaNhomHang" Type="varchar" MaxLength="50" />
+    <Property Name="KhoiLuong" Type="int" />
+    <Property Name="MaNhaCungCap" Type="varchar" MaxLength="50" />
+    <Property Name="MaDMTB" Type="varchar" MaxLength="50" />
+    <Property Name="XuatXu" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <Association Name="FK_ThietBi_DanhMucThietBi">
+    <End Role="DanhMucThietBi" Type="Self.DanhMucThietBi" Multiplicity="0..1" />
+    <End Role="ThietBi" Type="Self.ThietBi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DanhMucThietBi">
+        <PropertyRef Name="MaDMTB" />
+      </Principal>
+      <Dependent Role="ThietBi">
+        <PropertyRef Name="MaDMTB" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ThietBiNoiThatModelStoreContainer">
+    <EntitySet Name="ChiTietPhieuNhap" EntityType="Self.ChiTietPhieuNhap" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DanhMucThietBi" EntityType="Self.DanhMucThietBi" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PhieuNhap" EntityType="Self.PhieuNhap" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TaiKhoan" EntityType="Self.TaiKhoan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ThietBi" EntityType="Self.ThietBi" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ThietBi_DanhMucThietBi" Association="Self.FK_ThietBi_DanhMucThietBi">
+      <End Role="DanhMucThietBi" EntitySet="DanhMucThietBi" />
+      <End Role="ThietBi" EntitySet="ThietBi" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

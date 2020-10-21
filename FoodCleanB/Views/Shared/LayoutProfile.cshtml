@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "~/Views/Shared/LayoutShare.cshtml";
+}
+
+<div class="profile">
+    <div class="left-col">
+        <ul class="nav-container">
+            <li id="My-profile" class="nav-item">
+                <a href="@Url.Action("UserProfile", "User")" data-spm="My-profile"><i class="fa fa-user"></i> Thông tin cá nhân</a>
+            </li>
+            <li id="Address-book" class="nav-item">
+                <a href="@Url.Action("Shipping", "User")" data-spm="Address-book"><i class="fa fa-book"></i> Sổ địa chỉ</a>
+            </li>
+            <li id="Order" class="nav-item">
+                <a href="@Url.Action("Order", "User")" data-spm="Orders"><i class="fa fa-people-carry"></i> Đơn hàng</a>
+            </li>
+            <li id="WishList" class="nav-item">
+                <a href="@Url.Action("WishList", "User")"><i class="fa fa-heart"></i> Sản phẩm ưa thích</a>
+            </li>
+            <li id="WishList" class="nav-item">
+                <a href="@Url.Action("ChangePassword", "User")"><i class="fa fa-key"></i> Đổi mật khẩu</a>
+            </li>
+        </ul>
+    </div>
+    <div class="right-col">
+        @if (TempData["Message"] != null)
+        {
+            <h3 class="text-center font-weight-bold">@TempData["Message"]</h3>
+        }
+
+        @RenderBody()
+    </div>
+</div>

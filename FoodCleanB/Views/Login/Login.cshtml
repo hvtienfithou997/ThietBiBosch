@@ -1,0 +1,17 @@
+﻿@{
+    Layout = "~/Views/Shared/LayoutLogin.cshtml";
+    ViewBag.Title = "Đăng nhập";
+}
+
+<h2 class="active">Đăng nhập</h2>
+
+            <!-- Icon -->
+
+<!-- Login Form -->
+@using (Html.BeginForm("Login", "Login", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <input type="text" id="login" class="form-control" name="TenDangNhap" placeholder="Tài khoản" required>
+    <input type="password" id="password" class="form-control" name="MatKhau" placeholder="Mật khẩu" required>
+    <input type="submit" class="fadeIn fourth" value="Đăng nhập">
+}

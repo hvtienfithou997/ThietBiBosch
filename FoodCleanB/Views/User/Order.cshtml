@@ -1,0 +1,54 @@
+﻿@model IEnumerable<FoodCleanB.Database.DonHang>
+
+@{
+    ViewBag.Title = "Order";
+    Layout = "~/Views/Shared/LayoutProfile.cshtml";
+}
+
+<h2>Đơn hàng</h2>
+
+@if (Model != null)
+{   
+    foreach (var item in Model)
+    {        <div class="order">
+            <p>Mã đơn hàng: @item.MaSo</p>
+            <div>
+               Ngày mua: @item.NgayLap.Value.ToString("dd/MM/yyyy HH:mm:ss")
+            </div>
+            <div class="item-order ">
+
+
+                @foreach (var itemOrder in item.ChiTietDonHang)
+                {
+                    if (item.SanPham != null)
+                    {
+                        <div class="">
+                            <div class=""> <img class="img-responsive img-thumbnail" src="@itemOrder.SanPham.AnhSanPham" width="150px" /></div>
+                            <div class="">
+                                Tên hàng: @itemOrder.SanPham.TenHang
+                            </div>
+                            <div class="">
+                                Số lượng: @itemOrder.SoLuong
+                            </div>
+                        </div>
+                    }
+
+                }
+
+
+            </div>
+            <div class="shipping-info">
+                <div class="ship-adderss">
+                    Địa chỉ: @item.DiaChi
+                </div>
+                <div class="contact">
+                    Số điện thoại: @item.SDT
+                </div>
+            </div>
+            <div>
+                <b>Thành tiền:</b> <span>@item.TongTien.ToString("##,###") đ</span>
+            </div>
+        </div>
+        <hr>
+    }
+}

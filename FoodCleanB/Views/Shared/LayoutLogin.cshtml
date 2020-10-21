@@ -1,0 +1,37 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" type="text/css" href="~/css/login.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Tabs Titles -->
+            
+
+            <!-- Icon -->
+            <div class="fadeIn first">
+                <img src="https://i.ya-webdesign.com/images/vegetables-icon-png-5.png" id="icon" alt="User Icon" />
+            </div>
+
+            @RenderBody()
+
+            <div id="formFooter">
+                <a href="@Url.Action("DangKy","Login")">Đăng ký</a> <br>
+                <a class="underlineHover" href="#">Chuyên đề tốt nghiệp</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

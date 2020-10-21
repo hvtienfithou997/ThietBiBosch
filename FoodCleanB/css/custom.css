@@ -1,0 +1,38 @@
+
+/** ADD YOUR AWESOME CODES HERE **/
+
+a {
+    color: blue;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+.profile {
+    display: flex;
+    flex-direction: row;
+    padding: 15px 0;
+}
+
+.profile .left-col {
+    width: 150px;
+    display: inline-block;
+    border-right: 1px solid #aaa;
+    padding-right: 5px;
+}
+
+.profile .left-col a {
+    color: darkslategrey;
+    font-weight: bold;
+    line-height: 3em;
+}
+
+.profile .left-col a:hover {
+    color: black;
+}
+
+.profile .right-col {
+    padding-left: 15px;
+    width: 100%;
+}

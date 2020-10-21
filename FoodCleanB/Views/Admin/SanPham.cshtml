@@ -1,0 +1,103 @@
+﻿@model IEnumerable<FoodCleanB.Database.ThietBi>
+
+@{
+    ViewBag.Title = "Admin - Sản phẩm";
+    Layout = "~/Views/Shared/LayoutShare.cshtml";
+}
+
+<h2>Danh sách thiết bị</h2>
+
+
+    @Html.ActionLink("Thêm mới", "ThemSanPham",null, new { @type="button",@class="btn btn-info"})
+
+
+@if (TempData["Message"] != null)
+{
+    <h3 class="text-center font-weight-bold">@TempData["Message"]</h3>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Id
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Sku)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.TenThietBi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MoTa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiaThanh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </th>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.KhoiLuong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiaKhuyenMai)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AnhSanPham)
+        </th>
+      
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <span>@item.MaThietBi</span> <br />
+                <a href=" @Url.Action("Detail", "SanPham", new { ItemId = item.MaThietBi, Title = item.TenThietBi.Replace(" ", "-") })">Xem chi tiết</a>
+            </td>
+          
+            <td>
+                @Html.DisplayFor(modelItem => item.TenThietBi)
+            </td>
+            <td>
+                <a class="btn btn-primary" data-toggle="collapse" href="#@(item.MaThietBi)" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Xem thêm
+                </a>
+                <div class="collapse" id="@item.MaThietBi">
+                    <div class="card card-body">
+                        @Html.Raw(item.MoTa)
+                    </div>
+                </div>
+            </td>
+            <td>
+                @item.GiaThanh đ
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuong)
+            </td>
+            <td>
+                @if (item.KhoiLuong != null)
+                {
+                    item.KhoiLuong = item.KhoiLuong * 1000;
+                    @Html.Raw(item.KhoiLuong + "g")
+                }
+                
+
+            </td>
+           
+            <td>
+                @(item.GiaKhuyenMai != null ? item.GiaKhuyenMai.GetValueOrDefault().ToString("##,###") : "0") đ
+            </td>
+            <td>
+                <img src="@item.AnhSanPham" alt="ảnh" style="max-width: 150px; height: auto;" />
+            </td>
+        
+            <td>
+                <a type="button" class="btn btn-warning" href="@Url.Action("EditSanPham", "Admin", new { MaHang = item.MaThietBi })" target="_blank">Sửa</a>
+                @Html.ActionLink("Xóa", "DeleteSanPham", new { MaHang = item.MaThietBi }, new {@class = "btn btn-danger", @type = "button" })
+            </td>
+        </tr>
+    }
+</table>

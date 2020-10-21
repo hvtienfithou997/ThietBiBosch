@@ -1,0 +1,278 @@
+﻿@using FoodCleanB.Database
+
+@{
+    TaiKhoan user = Session["User"] as TaiKhoan;
+}
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Site Metas -->
+    <title>Bosch - Thiết bị nhà bếp @ViewBag.Title</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <script src="~/Scripts/home.js"></script>
+    <link rel="shortcut icon" href="~/images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="~/images/apple-touch-icon.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="~/css/style.css">
+    <link href="~/css/register.css" rel="stylesheet" />
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="~/css/responsive.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="~/css/custom.css">
+    <!-- End copyright  -->
+    <!-- ALL JS FILES -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <!-- ALL PLUGINS -->
+    <script src="~/js/jquery.superslides.min.js"></script>
+    <script src="~/js/bootstrap-select.js"></script>
+    <script src="~/js/inewsticker.js"></script>
+    <script src="~/js/bootsnav.js"></script>
+    <script src="~/js/images-loded.min.js"></script>
+    <script src="~/js/isotope.min.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/baguetteBox.min.js"></script>
+    <script src="~/js/form-validator.min.js"></script>
+    <script src="~/js/contact-form-script.js"></script>
+    <script src="~/js/custom.js"></script>
+
+    <script>
+        $(document).on('click', '.add-card', function () {
+            var itemId = $(this).data('itemid');
+
+            $.ajax({
+                method: 'POST',
+                url: '@Url.Action("Insert", "Order")',
+                data: { 'itemId': itemId },
+                success: function(data) {
+                    alert(data.Message);
+
+                    if (data.Code == 1) {
+                        var soSanPham = $('#cartCount').text();
+                        console.log(soSanPham);
+                        if (!soSanPham) {
+                            soSanPham = 0;
+                        }
+                        soSanPham = parseInt(soSanPham);
+                        soSanPham += 1;
+                        $('#cartCount').text(soSanPham);
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+
+<!-- Start Main Top -->
+<header class="main-header">
+    <!-- Start Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
+        <div class="container">
+            <!-- Start Header Navigation -->
+            <div class="navbar-header">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")"><img src="https://bosch-vietnam.com.vn/wp-content/uploads/2017/12/logo-bosch-vietnam.png" class="logo" alt="" width="100"></a>
+            </div>
+            <!-- End Header Navigation -->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbar-menu">
+                <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+                    <li class="nav-item active"><a class="nav-link" href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+                    @*<li class="nav-item"><a class="nav-link" href="about.html">Về chúng tôi</a></li>*@
+                    <li class="nav-item">
+                        <a href="@Url.Action("List", "SanPham", new { Page = 1, Title ="tất-cả", Id = 0 })" class="nav-link">Cửa hàng</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact", "About")">Liên hệ</a></li>
+
+                    @if (string.Equals(user?.TenDangNhap, "admin", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Admin")">Quản lý</a></li>
+                    }
+
+                    @if (user != null)
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Chào! @user.TenDangNhap</a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="@Url.Action("UserProfile", "User")" class = "nav-link"><i class='fa fa-user'></i> Tài khoản</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Order", "User")" class = "nav-link"><i class='fa fa-people-carry'></i> Đơn hàng</a>
+                                </li>
+                                <li class="">
+                                    <a href="@Url.Action("LogOut", "Login")" class = "nav-link"><i class='fa fa-door-open'></i> Đăng xuất</a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+            <!-- Start Atribute Navigation -->
+            <div class="attr-nav">
+                <ul>
+                    <li class="search">
+                        <a href="#">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </li>
+
+                    @*@if (user != null && user.TenDangNhap != "admin")
+                    {
+                        @Html.Action("CartCount", "Order")
+                    }*@
+
+                    @if (user == null)
+                    {
+                        <li class="">
+                            @Html.ActionLink("Đăng nhập", "Login", "Login")
+                        </li>
+                    }
+                </ul>
+            </div>
+            <!-- End Atribute Navigation -->
+        </div>
+        <!-- Start Side Menu -->
+        <!-- End Side Menu -->
+    </nav>
+    <!-- End Navigation -->
+</header>
+<!-- End Main Top -->
+<!-- Start Top Search -->
+<div class="top-search">
+    <div class="container">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+            <input type="text" class="form-control" name="search" placeholder="Search" onkeypress="search(event,this.value)">
+            <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+        </div>
+    </div>
+</div>
+<!-- End Top Search -->
+
+<div class="content-food-clean container">
+    @RenderBody()
+</div>
+<footer>
+    <div class="footer-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-12 col-sm-12">
+                    <div class="footer-top-box">
+                        <h3>Trụ sở chính tại Hà Nội</h3>
+                        <ul class="list-time">
+                            <li>Tòa nhà 96 Định Công, quận Thanh Xuân, Thành phố Hà Nội</li>
+                            <li>Thứ 2 - Thứ 6: 08.00am to 05.00pm</li>
+                            <li>Thứ 7: 10.00am to 08.00pm</li>
+                            <li>Chủ nhật: <span>Đóng cửa</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12 col-sm-12">
+                    <div class="footer-top-box">
+                        <h3>Email phản hồi</h3>
+                        <form class="newsletter-box">
+                            <div class="form-group">
+                                <input class="" type="email" name="Email" placeholder="Email Address*" />
+                                <i class="fa fa-envelope"></i>
+                            </div>
+                            <button class="btn hvr-hover" type="submit">Gửi</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12 col-sm-12">
+                    <div class="footer-top-box">
+                        <h3>Mạng xã hội</h3>
+                        <p>Chia sẽ để quảng cáo.</p>
+                        <ul>
+                            <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fab fa-pinterest-p" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fab fa-whatsapp" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-lg-4 col-md-12 col-sm-12">
+                    <div class="footer-widget">
+                        <h4>Sản phẩm chính hãng tại Việt Nam và thế giới</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12 col-sm-12">
+                    <div class="footer-link">
+                        <h4>Thông tin thêm</h4>
+                        <ul>
+                            <li><a href="#">Trang chủ</a></li>
+                            <li><a href="#">Cửa hàng</a></li>
+                            <li><a href="#">Liên hệ</a></li>
+                            @*<li><a href="#">Terms &amp; Conditions</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Delivery Information</a></li>*@
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12 col-sm-12">
+                    <div class="footer-link-contact">
+                        <h4>Liên hệ</h4>
+                        <ul>
+                            <li>
+                                <p><i class="fas fa-map-marker-alt"></i>Địa chỉ: Michael I. Days 3756 <br>Preston Street Wichita,<br> KS 67213 </p>
+                            </li>
+                            <li>
+                                <p><i class="fas fa-phone-square"></i>Số điện thoại: <a href="+84945935480">+84945935480</a></p>
+                            </li>
+                            <li>
+                                <p><i class="fas fa-envelope"></i>Email: <a href="mailto:haha123@gmail.com">haha123@gmail.com</a></p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- End Footer  -->
+<!-- Start copyright  -->
+<div class="footer-copyright">
+    <p class="footer-company">
+        CHUYÊN ĐỀ TỐT NGHIỆP. &copy; 2020 <a href="#">Bosch HOU</a> Design By : 
+                                          <a href="https://facebook.com/">Kiều Trang</a>
+    </p>
+</div>
+</body>
+    <script>
+        function search(event, keyword) {
+            
+            if (event.keyCode == 13) {
+                
+                window.location.href = '@Url.Action("Search","SanPham")?search=' + keyword;
+            }
+        }
+    </script>
+</html>

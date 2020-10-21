@@ -1,0 +1,40 @@
+﻿@model List<FoodCleanB.Database.DanhMucThietBi>
+
+@{
+    ViewBag.Title = "Admin - Nhóm";
+    Layout = "~/Views/Shared/LayoutShare.cshtml";
+}
+
+<h2>Nhóm sản phẩm</h2>
+
+<p>
+    @Html.ActionLink("Thêm Nhóm", "ThemNhomHang")
+</p>
+
+@if (TempData["Message"] != null)
+{
+    <h3 class="text-center font-weight-bold">@TempData["Message"]</h3>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Id
+        </th>
+        <th>
+            Tên DMTB
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaDMTB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenDMTB)
+            </td>
+        </tr>
+    }
+</table>

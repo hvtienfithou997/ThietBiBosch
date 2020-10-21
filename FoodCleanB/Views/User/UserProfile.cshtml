@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "UserProfile";
+    Layout = "~/Views/Shared/LayoutProfile.cshtml";
+    var user = ViewBag.User;
+}
+
+<h2>Thông tin cá nhân</h2>
+
+    <div class="row">
+        
+
+        <div class="col-md-6"><h2 class="text-success">Tên đăng nhập:  @user.TenDangNhap</h2></div>
+    </div>

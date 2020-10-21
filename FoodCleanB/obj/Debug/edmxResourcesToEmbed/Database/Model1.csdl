@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CDLTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ChiTietDonHang">
+    <Key>
+      <PropertyRef Name="MaSo" />
+    </Key>
+    <Property Name="MaSo" Type="Guid" Nullable="false" />
+    <Property Name="MaDonHang" Type="Guid" Nullable="false" />
+    <Property Name="MaHang" Type="Int32" Nullable="false" />
+    <Property Name="SoLuong" Type="Int32" />
+    <Property Name="ThanhTien" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="DonHang" Relationship="Self.FK__ChiTietDo__MaDon__151B244E" FromRole="ChiTietDonHang" ToRole="DonHang" />
+    <NavigationProperty Name="SanPham" Relationship="CDLTModel.FK__ChiTietDo__MaHan__160F4887" FromRole="ChiTietDonHang" ToRole="SanPham" />
+  </EntityType>
+  <EntityType Name="Coupon">
+    <Key>
+      <PropertyRef Name="MaSo" />
+    </Key>
+    <Property Name="MaSo" Type="Guid" Nullable="false" />
+    <Property Name="KhuyenMai" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="NgayHetHan" Type="DateTimeOffset" Precision="0" />
+    <Property Name="SoLuong" Type="Int32" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="DonHangs" Relationship="Self.FK__DonHang__MaGiamG__10566F31" FromRole="Coupon" ToRole="DonHang" />
+  </EntityType>
+  <EntityType Name="DonHang">
+    <Key>
+      <PropertyRef Name="MaSo" />
+    </Key>
+    <Property Name="MaSo" Type="Guid" Nullable="false" />
+    <Property Name="MaTaiKhoan" Type="Guid" Nullable="false" />
+    <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SDT" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DiaChi" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MaGiamGia" Type="Guid" />
+    <Property Name="TongTien" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="NgayLap" Type="DateTimeOffset" Precision="0" />
+    <NavigationProperty Name="ChiTietDonHangs" Relationship="Self.FK__ChiTietDo__MaDon__151B244E" FromRole="DonHang" ToRole="ChiTietDonHang" />
+    <NavigationProperty Name="Coupon" Relationship="Self.FK__DonHang__MaGiamG__10566F31" FromRole="DonHang" ToRole="Coupon" />
+    <NavigationProperty Name="TaiKhoan" Relationship="Self.FK__DonHang__MaTaiKh__114A936A" FromRole="DonHang" ToRole="TaiKhoan" />
+  </EntityType>
+  <EntityType Name="NhaCungCap">
+    <Key>
+      <PropertyRef Name="MaSo" />
+    </Key>
+    <Property Name="MaSo" Type="Guid" Nullable="false" />
+    <Property Name="Ten" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Sdt" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="DiaChi" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="SanPhams" Relationship="CDLTModel.FK__SanPham__MaNhaCu__76969D2E" FromRole="NhaCungCap" ToRole="SanPham" />
+  </EntityType>
+  <EntityType Name="NhomHang">
+    <Key>
+      <PropertyRef Name="MaSo" />
+    </Key>
+    <Property Name="MaSo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ten" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="SanPhams" Relationship="CDLTModel.FK__SanPham__MaNhomH__778AC167" FromRole="NhomHang" ToRole="SanPham" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TaiKhoan">
+    <Key>
+      <PropertyRef Name="MaTaiKhoan" />
+    </Key>
+    <Property Name="MaTaiKhoan" Type="Guid" Nullable="false" />
+    <Property Name="TenDangNhap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MatKhau" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TokenResetMatKhau" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="TokenNgayHetHan" Type="DateTimeOffset" Precision="0" />
+    <NavigationProperty Name="DonHangs" Relationship="Self.FK__DonHang__MaTaiKh__114A936A" FromRole="TaiKhoan" ToRole="DonHang" />
+    <NavigationProperty Name="ThongTinKhachHangs" Relationship="Self.FK__ThongTinK__MaTai__07C12930" FromRole="TaiKhoan" ToRole="ThongTinKhachHang" />
+    <NavigationProperty Name="SanPhamGioHangs" Relationship="CDLTModel.FK__SanPhamGi__MaTai__1BC821DD" FromRole="TaiKhoan" ToRole="SanPhamGioHang" />
+  </EntityType>
+  <EntityType Name="ThongTinKhachHang">
+    <Key>
+      <PropertyRef Name="MaSo" />
+    </Key>
+    <Property Name="MaSo" Type="Guid" Nullable="false" />
+    <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SDT" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DiaChi" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+    <Property Name="GioiTinh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="MacDinh" Type="Boolean" />
+    <Property Name="MaTaiKhoan" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="TaiKhoan" Relationship="Self.FK__ThongTinK__MaTai__07C12930" FromRole="ThongTinKhachHang" ToRole="TaiKhoan" />
+  </EntityType>
+  <Association Name="FK__ChiTietDo__MaDon__151B244E">
+    <End Role="DonHang" Type="Self.DonHang" Multiplicity="1" />
+    <End Role="ChiTietDonHang" Type="Self.ChiTietDonHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DonHang">
+        <PropertyRef Name="MaSo" />
+      </Principal>
+      <Dependent Role="ChiTietDonHang">
+        <PropertyRef Name="MaDonHang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DonHang__MaGiamG__10566F31">
+    <End Role="Coupon" Type="Self.Coupon" Multiplicity="0..1" />
+    <End Role="DonHang" Type="Self.DonHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Coupon">
+        <PropertyRef Name="MaSo" />
+      </Principal>
+      <Dependent Role="DonHang">
+        <PropertyRef Name="MaGiamGia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DonHang__MaTaiKh__114A936A">
+    <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="1" />
+    <End Role="DonHang" Type="Self.DonHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaiKhoan">
+        <PropertyRef Name="MaTaiKhoan" />
+      </Principal>
+      <Dependent Role="DonHang">
+        <PropertyRef Name="MaTaiKhoan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ThongTinK__MaTai__07C12930">
+    <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="1" />
+    <End Role="ThongTinKhachHang" Type="Self.ThongTinKhachHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaiKhoan">
+        <PropertyRef Name="MaTaiKhoan" />
+      </Principal>
+      <Dependent Role="ThongTinKhachHang">
+        <PropertyRef Name="MaTaiKhoan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CDLTEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ChiTietDonHangs" EntityType="Self.ChiTietDonHang" />
+    <EntitySet Name="Coupons" EntityType="Self.Coupon" />
+    <EntitySet Name="DonHangs" EntityType="Self.DonHang" />
+    <EntitySet Name="NhaCungCaps" EntityType="Self.NhaCungCap" />
+    <EntitySet Name="NhomHangs" EntityType="Self.NhomHang" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="TaiKhoans" EntityType="Self.TaiKhoan" />
+    <EntitySet Name="ThongTinKhachHangs" EntityType="Self.ThongTinKhachHang" />
+    <AssociationSet Name="FK__ChiTietDo__MaDon__151B244E" Association="Self.FK__ChiTietDo__MaDon__151B244E">
+      <End Role="DonHang" EntitySet="DonHangs" />
+      <End Role="ChiTietDonHang" EntitySet="ChiTietDonHangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DonHang__MaGiamG__10566F31" Association="Self.FK__DonHang__MaGiamG__10566F31">
+      <End Role="Coupon" EntitySet="Coupons" />
+      <End Role="DonHang" EntitySet="DonHangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DonHang__MaTaiKh__114A936A" Association="Self.FK__DonHang__MaTaiKh__114A936A">
+      <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+      <End Role="DonHang" EntitySet="DonHangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ThongTinK__MaTai__07C12930" Association="Self.FK__ThongTinK__MaTai__07C12930">
+      <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+      <End Role="ThongTinKhachHang" EntitySet="ThongTinKhachHangs" />
+    </AssociationSet>
+    <EntitySet Name="SanPhams" EntityType="CDLTModel.SanPham" />
+    <AssociationSet Name="FK__ChiTietDo__MaHan__160F4887" Association="CDLTModel.FK__ChiTietDo__MaHan__160F4887">
+      <End Role="SanPham" EntitySet="SanPhams" />
+      <End Role="ChiTietDonHang" EntitySet="ChiTietDonHangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SanPham__MaNhaCu__76969D2E" Association="CDLTModel.FK__SanPham__MaNhaCu__76969D2E">
+      <End Role="NhaCungCap" EntitySet="NhaCungCaps" />
+      <End Role="SanPham" EntitySet="SanPhams" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SanPham__MaNhomH__778AC167" Association="CDLTModel.FK__SanPham__MaNhomH__778AC167">
+      <End Role="NhomHang" EntitySet="NhomHangs" />
+      <End Role="SanPham" EntitySet="SanPhams" />
+    </AssociationSet>
+    <EntitySet Name="SanPhamGioHangs" EntityType="CDLTModel.SanPhamGioHang" />
+    <AssociationSet Name="FK__SanPhamGi__MaHan__1CBC4616" Association="CDLTModel.FK__SanPhamGi__MaHan__1CBC4616">
+      <End Role="SanPham" EntitySet="SanPhams" />
+      <End Role="SanPhamGioHang" EntitySet="SanPhamGioHangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SanPhamGi__MaTai__1BC821DD" Association="CDLTModel.FK__SanPhamGi__MaTai__1BC821DD">
+      <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+      <End Role="SanPhamGioHang" EntitySet="SanPhamGioHangs" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="SanPham">
+    <Key>
+      <PropertyRef Name="MaHang" />
+    </Key>
+    <Property Name="MaHang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaNhaCungCap" Type="Guid" Nullable="false" />
+    <Property Name="MaNhomHang" Type="Int32" Nullable="false" />
+    <Property Name="Sku" Type="Guid" />
+    <Property Name="TenHang" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="MoTa" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="GiaThanh" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="SoLuong" Type="Int32" Nullable="false" />
+    <Property Name="KhoiLuong" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="TheTich" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="KhuyenMai" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="AnhSanPham" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ChiTietDonHangs" Relationship="CDLTModel.FK__ChiTietDo__MaHan__160F4887" FromRole="SanPham" ToRole="ChiTietDonHang" />
+    <NavigationProperty Name="NhaCungCap" Relationship="CDLTModel.FK__SanPham__MaNhaCu__76969D2E" FromRole="SanPham" ToRole="NhaCungCap" />
+    <NavigationProperty Name="NhomHang" Relationship="CDLTModel.FK__SanPham__MaNhomH__778AC167" FromRole="SanPham" ToRole="NhomHang" />
+    <NavigationProperty Name="SanPhamGioHangs" Relationship="CDLTModel.FK__SanPhamGi__MaHan__1CBC4616" FromRole="SanPham" ToRole="SanPhamGioHang" />
+  </EntityType>
+  <Association Name="FK__ChiTietDo__MaHan__160F4887">
+    <End Type="CDLTModel.SanPham" Role="SanPham" Multiplicity="1" />
+    <End Type="CDLTModel.ChiTietDonHang" Role="ChiTietDonHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SanPham">
+        <PropertyRef Name="MaHang" />
+      </Principal>
+      <Dependent Role="ChiTietDonHang">
+        <PropertyRef Name="MaHang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SanPham__MaNhaCu__76969D2E">
+    <End Type="CDLTModel.NhaCungCap" Role="NhaCungCap" Multiplicity="1" />
+    <End Type="CDLTModel.SanPham" Role="SanPham" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhaCungCap">
+        <PropertyRef Name="MaSo" />
+      </Principal>
+      <Dependent Role="SanPham">
+        <PropertyRef Name="MaNhaCungCap" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SanPham__MaNhomH__778AC167">
+    <End Type="CDLTModel.NhomHang" Role="NhomHang" Multiplicity="1" />
+    <End Type="CDLTModel.SanPham" Role="SanPham" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhomHang">
+        <PropertyRef Name="MaSo" />
+      </Principal>
+      <Dependent Role="SanPham">
+        <PropertyRef Name="MaNhomHang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="SanPhamGioHang">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="MaTaiKhoan" Type="Guid" Nullable="false" />
+    <Property Name="MaHang" Type="Int32" Nullable="false" />
+    <Property Name="SoLuong" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="SanPham" Relationship="CDLTModel.FK__SanPhamGi__MaHan__1CBC4616" FromRole="SanPhamGioHang" ToRole="SanPham" />
+    <NavigationProperty Name="TaiKhoan" Relationship="CDLTModel.FK__SanPhamGi__MaTai__1BC821DD" FromRole="SanPhamGioHang" ToRole="TaiKhoan" />
+  </EntityType>
+  <Association Name="FK__SanPhamGi__MaHan__1CBC4616">
+    <End Type="CDLTModel.SanPham" Role="SanPham" Multiplicity="1" />
+    <End Type="CDLTModel.SanPhamGioHang" Role="SanPhamGioHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SanPham">
+        <PropertyRef Name="MaHang" />
+      </Principal>
+      <Dependent Role="SanPhamGioHang">
+        <PropertyRef Name="MaHang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SanPhamGi__MaTai__1BC821DD">
+    <End Type="CDLTModel.TaiKhoan" Role="TaiKhoan" Multiplicity="1" />
+    <End Type="CDLTModel.SanPhamGioHang" Role="SanPhamGioHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaiKhoan">
+        <PropertyRef Name="MaTaiKhoan" />
+      </Principal>
+      <Dependent Role="SanPhamGioHang">
+        <PropertyRef Name="MaTaiKhoan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

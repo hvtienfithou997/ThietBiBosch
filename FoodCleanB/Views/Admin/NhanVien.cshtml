@@ -1,0 +1,101 @@
+﻿@model IEnumerable<FoodCleanB.Database.NhanVien>
+@{
+    ViewBag.Title = "NhanVien";
+    Layout = "~/Views/Shared/LayoutShare.cshtml";
+
+}
+
+<style>
+    #search-form div:first-child {
+        padding-right: 0;
+    }
+
+    #search-form div:last-child {
+        padding-left: 0;
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row" id="search-form">
+        <div class="col-md-5"></div>
+        <div class="col-md-5">
+            <input type="text" class="form-control" name="search" value="" />
+        </div>
+        <div class="col-md-2">
+            <input type="submit" value="Tìm nhân viên" class="btn btn-primary" />
+        </div>
+    </div>
+}
+<h2>Danh sách nhân viên</h2>
+@Html.ActionLink("Thêm mới", "ThemNhanVien", null, new { @type = "button", @class = "btn btn-info" })
+<table class="table">
+    <tr>
+        <th>
+            STT
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaNhanVien)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TenNhanVien)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GioiTinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SDT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiaChi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChucVu)
+        </th>
+        <th></th>
+    </tr>
+    @if (Model != null)
+    {
+        var stt = 1;
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>@stt</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaNhanVien)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenNhanVien)
+                </td>
+
+                @if (item.GioiTinh == true)
+                {
+                    <td>
+                        Nam
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        Nữ
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.SDT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiaChi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ChucVu)
+                </td>
+                <td>
+                    <a type="button" class="btn btn-warning" href="@Url.Action("EditNhanVien", "Admin", new { maNhanVien = item.MaNhanVien })" target="_blank">Sửa</a>
+                    @Html.ActionLink("Xóa", "DeleteNhanVien", new { maNhanVien = item.MaNhanVien }, new { @class = "btn btn-danger", @type = "button" })
+                </td>
+            </tr>
+            @(stt++);
+        }
+    }
+</table>

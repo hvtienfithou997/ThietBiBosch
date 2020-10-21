@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutShare.cshtml";
+}
+<style>
+    #category a{
+        font-size: 18px;        
+    }
+    #category a:hover {
+        background-color: darkseagreen;
+        color: #fff;
+        font-size: 19px;
+    }
+</style>
+<h2>Trang Admin</h2>
+    <div class="list-group" id="category">
+        <a type="button" class="list-group-item list-group-item-action" href="@Url.Action("SanPham")">Quản lý sản phẩm</a>
+        <a type="button" class="list-group-item list-group-item-action" href="@Url.Action("NhomHang")">Nhóm hàng</a>
+        <a type="button" class="list-group-item list-group-item-action" href="@Url.Action("NhanVien")">Quản lý nhân viên </a>
+        <a type="button" class="list-group-item list-group-item-action" href="@Url.Action("PhieuNhapKho")">Quản lý thông tin phiếu nhập</a>
+    </div>
+
+

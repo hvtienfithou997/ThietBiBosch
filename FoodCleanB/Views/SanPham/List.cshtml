@@ -1,0 +1,37 @@
+﻿@model List<FoodCleanB.Database.ThietBi>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/LayoutShare.cshtml";
+
+    var pageNumber = ViewBag.Page as int? ?? 1;
+    var pageSize = ViewBag.PageSize as int? ?? Model.Count;
+    var totalItem = ViewBag.Total as int? ?? pageSize;
+    var totalPage = (int)Math.Ceiling((double)totalItem / pageSize);
+}
+
+<h2>Sản phẩm của cửa hàng</h2>
+@if (ViewBag.Category != null)
+{
+    <h3>Loại: @ViewBag.Category</h3>
+}
+
+<div class="row">
+    @Html.Partial("HomeProduct", Model)
+</div>
+
+@if (pageNumber <= totalPage)
+{
+    <div class="paging d-block text-center">
+        @if (pageNumber > 1)
+        {
+            <a class="btn btn-link btn-prev" href="@Url.Action("List", new { Page = pageNumber - 1, Id = ViewBag.NhomHang, Title = ViewBag.NhomHangTen })"><i class="fa fa-chevron-left"></i> Trước</a>
+        }
+
+        <span class="btn page-number">@pageNumber</span>
+
+        @if (pageNumber < totalPage)
+        {
+            <a class="btn btn-link btn-next" href="@Url.Action("List", new { Page = pageNumber + 1, Id = ViewBag.NhomHang, Title = ViewBag.NhomHangTen })">Tiếp <i class="fa fa-chevron-right"></i></a>
+        }
+    </div>
+}

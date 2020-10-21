@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ThietBiNoiThatModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ChiTietPhieuNhap">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="MaPhieuNhap" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DonGiaNhap" Type="Int32" />
+    <Property Name="SoLuongNhap" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="MaThietBi" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DanhMucThietBi">
+    <Key>
+      <PropertyRef Name="MaDMTB" />
+    </Key>
+    <Property Name="MaDMTB" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TenDMTB" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ThietBis" Relationship="Self.FK_ThietBi_DanhMucThietBi" FromRole="DanhMucThietBi" ToRole="ThietBi" />
+  </EntityType>
+  <EntityType Name="NhanVien">
+    <Key>
+      <PropertyRef Name="MaNhanVien" />
+    </Key>
+    <Property Name="MaNhanVien" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TenNhanVien" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="GioiTinh" Type="Boolean" />
+    <Property Name="SDT" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
+    <Property Name="DiaChi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ChucVu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="PhieuNhap">
+    <Key>
+      <PropertyRef Name="MaPhieuNhap" />
+    </Key>
+    <Property Name="MaPhieuNhap" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NgayNhap" Type="DateTime" Precision="3" />
+    <Property Name="MaNhanVien" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SoLuong" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="DonGia" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="MaThietBi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TenThietBi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DonViTinh" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TaiKhoan">
+    <Key>
+      <PropertyRef Name="MaTaiKhoan" />
+    </Key>
+    <Property Name="MaTaiKhoan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TenDangNhap" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="MatKhau" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="MaNhanVien" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ThietBi">
+    <Key>
+      <PropertyRef Name="MaThietBi" />
+    </Key>
+    <Property Name="MaThietBi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TenThietBi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="GiaThanh" Type="Int32" />
+    <Property Name="GiaKhuyenMai" Type="Int32" />
+    <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AnhSanPham" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="SoLuong" Type="Int32" />
+    <Property Name="MaNhomHang" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="KhoiLuong" Type="Int32" />
+    <Property Name="MaNhaCungCap" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MaDMTB" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DanhMucThietBi" Relationship="Self.FK_ThietBi_DanhMucThietBi" FromRole="ThietBi" ToRole="DanhMucThietBi" />
+    <Property Name="XuatXu" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_ThietBi_DanhMucThietBi">
+    <End Role="DanhMucThietBi" Type="Self.DanhMucThietBi" Multiplicity="0..1" />
+    <End Role="ThietBi" Type="Self.ThietBi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DanhMucThietBi">
+        <PropertyRef Name="MaDMTB" />
+      </Principal>
+      <Dependent Role="ThietBi">
+        <PropertyRef Name="MaDMTB" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ThietBiNoiThatEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ChiTietPhieuNhaps" EntityType="Self.ChiTietPhieuNhap" />
+    <EntitySet Name="DanhMucThietBis" EntityType="Self.DanhMucThietBi" />
+    <EntitySet Name="NhanViens" EntityType="Self.NhanVien" />
+    <EntitySet Name="PhieuNhaps" EntityType="Self.PhieuNhap" />
+    <EntitySet Name="TaiKhoans" EntityType="Self.TaiKhoan" />
+    <EntitySet Name="ThietBis" EntityType="Self.ThietBi" />
+    <AssociationSet Name="FK_ThietBi_DanhMucThietBi" Association="Self.FK_ThietBi_DanhMucThietBi">
+      <End Role="DanhMucThietBi" EntitySet="DanhMucThietBis" />
+      <End Role="ThietBi" EntitySet="ThietBis" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

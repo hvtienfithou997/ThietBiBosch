@@ -1,0 +1,70 @@
+﻿@using FoodCleanB.Database
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutShare.cshtml";
+}
+
+
+<div class="products-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="title-all text-center">
+                    <h1>Thiết bị nhà bếp - Bosch</h1>
+                    @*<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus enim.</p>*@
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="special-menu text-center">
+                    <div class="button-group filter-button-group">
+                        <button class="nhom-hang active" data-filter="">Nổi bật</button>
+                        @*@foreach (var item in (List<NhomHang>)ViewBag.NhomHang)
+        {
+
+        }*@
+                        @if (ViewBag.DMTB != null)
+                        {
+                            foreach (var item in ViewBag.DMTB)
+                            {
+                               
+                                <button class="nhom-hang" data-filter="@item.MaDMTB">@item.TenDMTB</button>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row special-list1 " id="specialList">
+            <div class="col-md-12 text-center"><i class="fa fa-spinner fa-pulse"></i> Đang tải...</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        GetListCaterogy("");
+
+        $('.nhom-hang').click(function() {
+            var nhomHang = $(this).data('filter');
+
+            GetListCaterogy(nhomHang);
+        });
+
+
+    });
+
+    function GetListCaterogy(nhomHang) {
+        $('#specialList').html('<div class="col-md-12 text-center"><i class="fa fa-spinner fa-pulse"></i> Đang tải...</div>');
+
+        $.ajax({
+                method: 'GET',
+                url: '@Url.Action("HomeProduct", "SanPham")',
+                data: { 'nhomHang': nhomHang },
+                success: function(result) {
+                    $('#specialList').html(result);
+                }
+            });
+    }
+</script>

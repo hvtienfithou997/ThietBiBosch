@@ -1,0 +1,55 @@
+﻿@model IEnumerable<FoodCleanB.Database.ThongTinKhachHang>
+
+@{
+    ViewBag.Title = "Shipping";
+    Layout = "~/Views/Shared/LayoutProfile.cshtml";
+}
+
+<h2>Shipping</h2>
+
+<p>
+    @Html.ActionLink("Thêm", "AddShipping")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Ten
+        </th>
+        <th>
+            SDT
+        </th>
+        <th>
+            Dia Chi
+        </th>
+        <th>
+            Mac Dinh
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ten)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SDT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaChi)
+            </td>
+            <td>
+                @Html.Raw(item.MacDinh == true ? "Mặc định" : string.Empty)
+            </td>
+            <td>
+                @if (item.MacDinh != true)
+                {
+                    @Html.ActionLink("Đặt mặc đinh", "SelectShippingDefault", new {id = item.MaSo}) 
+                    <br />
+                    @Html.ActionLink("Xóa", "DeleteShipping", new {id = item.MaSo})
+                }
+            </td>
+        </tr>
+    }
+</table>

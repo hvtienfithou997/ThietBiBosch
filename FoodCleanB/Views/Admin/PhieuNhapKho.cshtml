@@ -1,8 +1,13 @@
-﻿
+﻿@model IEnumerable<ThietBiBosch.Database.PhieuNhap>
+
 @{
     ViewBag.Title = "PhieuNhapKho";
     Layout = "~/Views/Shared/LayoutShare.cshtml";
 }
 
-<h2>PhieuNhapKho</h2>
+<h2>Phiếu nhập kho</h2>
 
+
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

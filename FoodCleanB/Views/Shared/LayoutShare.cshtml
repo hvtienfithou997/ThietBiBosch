@@ -98,7 +98,7 @@
                     <li class="nav-item active"><a class="nav-link" href="@Url.Action("Index", "Home")">Trang chủ</a></li>
                     @*<li class="nav-item"><a class="nav-link" href="about.html">Về chúng tôi</a></li>*@
                     <li class="nav-item">
-                        <a href="@Url.Action("List", "SanPham", new { Page = 1, Title ="tất-cả", Id = 0 })" class="nav-link">Cửa hàng</a>
+                        <a href="@Url.Action("List", "SanPham", new { Page = 1, Title ="tất-cả", Id = 0 })" class="nav-link">Danh sách thiết bị</a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact", "About")">Liên hệ</a></li>
 
@@ -115,9 +115,7 @@
                                 <li>
                                     <a href="@Url.Action("UserProfile", "User")" class = "nav-link"><i class='fa fa-user'></i> Tài khoản</a>
                                 </li>
-                                <li>
-                                    <a href="@Url.Action("Order", "User")" class = "nav-link"><i class='fa fa-people-carry'></i> Đơn hàng</a>
-                                </li>
+                                
                                 <li class="">
                                     <a href="@Url.Action("LogOut", "Login")" class = "nav-link"><i class='fa fa-door-open'></i> Đăng xuất</a>
                                 </li>

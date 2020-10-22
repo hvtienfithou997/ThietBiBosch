@@ -57,6 +57,7 @@ C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\bin\Antlr3.Runtime.dll
 C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\bin\EntityFramework.dll
 C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\bin\EntityFramework.SqlServer.dll
+C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\bin\EPPlus.dll
 C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\bin\Microsoft.Owin.dll
 C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\bin\Microsoft.Owin.Host.SystemWeb.dll
@@ -77,6 +78,7 @@ C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\bin\System.Web.WebPages.Razor.dll
 C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\bin\WebGrease.dll
 C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\bin\EntityFramework.xml
 C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\bin\EntityFramework.SqlServer.xml
+C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\bin\EPPlus.xml
 C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\bin\Microsoft.Owin.xml
 C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\bin\Microsoft.Owin.Host.SystemWeb.xml
 C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\bin\Microsoft.Owin.Security.xml
@@ -92,10 +94,8 @@ C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\bin\System.Web.WebPages.Razor.xml
 C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\bin\Newtonsoft.Json.xml
 C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\bin\Antlr3.Runtime.pdb
 C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\obj\Debug\ThietBiBosch.csprojAssemblyReference.cache
 C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\obj\Debug\ThietBiBosch.csproj.CoreCompileInputs.cache
 C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\obj\Debug\ThietBiBosch.csproj.CopyComplete
 C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\obj\Debug\FoodCleanB.dll
 C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\obj\Debug\FoodCleanB.pdb
-C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\bin\EPPlus.dll
-C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\bin\EPPlus.xml
+C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\obj\Debug\ThietBiBosch.csprojAssemblyReference.cache

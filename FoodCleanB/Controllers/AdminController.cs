@@ -81,7 +81,7 @@ namespace ThietBiBosch.Controllers
         public ActionResult ThemSanPham()
         {
             ViewBag.DMTB = db.DanhMucThietBis.Select(o => new SelectListItem { Value = o.MaDMTB, Text = o.TenDMTB }).ToList();
-            //ViewBag.NhomHang = db.DanhMucThietBis.Select(o => new SelectListItem { Value = o.MaDMTB.ToString(), Text = o.TenDMTB }).ToList();
+            
             return View();
         }
 
@@ -94,15 +94,11 @@ namespace ThietBiBosch.Controllers
             {
                 ModelState.AddModelError("TenThietBi", "Tên thiết bị bị bỏ trống.");
             }
-
-            //if (m == null || !ModelState.IsValid)
-            //{
-            //    ViewBag.NhaCungCap = Db.NhaCungCap.Select(o => new SelectListItem { Value = o.MaSo.ToString(), Text = o.Ten }).ToList();
-            //    ViewBag.NhomHang = Db.NhomHang.Select(o => new SelectListItem { Value = o.MaSo.ToString(), Text = o.Ten }).ToList();
-
-            //    return View(m);
-            //}
-
+            if (m == null || !ModelState.IsValid)
+            {
+                ViewBag.DMTB = db.DanhMucThietBis.Select(o => new SelectListItem { Value = o.MaDMTB, Text = o.TenDMTB }).ToList();
+                return View(m);
+            }
             try
             {
                 m.MaThietBi = Guid.NewGuid().ToString();
@@ -126,10 +122,8 @@ namespace ThietBiBosch.Controllers
         // GET: Admin/Edit/5
         public ActionResult EditSanPham(string maHang)
         {
-            //ViewBag.NhaCungCap = Db.NhaCungCap.Select(o => new SelectListItem { Value = o.MaSo.ToString(), Text = o.Ten }).ToList();
-            //ViewBag.NhomHang = Db.NhomHang.Select(o => new SelectListItem { Value = o.MaSo.ToString(), Text = o.Ten }).ToList();
             var item = db.ThietBis.FirstOrDefault(o => o.MaThietBi == maHang);
-
+            ViewBag.DMTB = db.DanhMucThietBis.Select(o => new SelectListItem { Value = o.MaDMTB, Text = o.TenDMTB }).ToList();
             if (item == null)
             {
                 TempData["Message"] = $"Không có sản phẩm với mã số {maHang}";
@@ -150,8 +144,7 @@ namespace ThietBiBosch.Controllers
 
             if (m == null || !ModelState.IsValid)
             {
-                //ViewBag.NhaCungCap = Db.NhaCungCap.Select(o => new SelectListItem { Value = o.MaSo.ToString(), Text = o.Ten }).ToList();
-                //ViewBag.NhomHang = Db.NhomHang.Select(o => new SelectListItem { Value = o.MaSo.ToString(), Text = o.Ten }).ToList();
+                ViewBag.DMTB = db.DanhMucThietBis.Select(o => new SelectListItem { Value = o.MaDMTB, Text = o.TenDMTB }).ToList();
                 return View(m);
             }
 
@@ -170,6 +163,7 @@ namespace ThietBiBosch.Controllers
                 existed.AnhSanPham = m.AnhSanPham;
                 existed.MaNhaCungCap = m.MaNhaCungCap;
                 existed.MaNhomHang = m.MaNhomHang;
+                existed.MaDMTB = m.MaDMTB;
                 existed.GiaThanh = m.GiaThanh;
                 existed.KhoiLuong = m.KhoiLuong;
                 existed.MoTa = m.MoTa;
@@ -286,7 +280,8 @@ namespace ThietBiBosch.Controllers
 
         public ActionResult PhieuNhapKho()
         {
-            return View();
+            var phieuNhap = db.PhieuNhaps.ToList();
+            return View(phieuNhap);
         }
 
         public ActionResult XuatExcel()
@@ -341,43 +336,5 @@ namespace ThietBiBosch.Controllers
 
             return View();
         }
-
-        //#endregion Sản phẩm
-
-        //      [HttpGet]
-        //      public ActionResult NhaCungCap()
-        //      {
-        //          var nhaCungCap = Db.NhaCungCap.ToList();
-        //          return View(nhaCungCap);
-        //      }
-
-        //      [HttpGet]
-        //      public ActionResult ThemNhaCungCap()
-        //      {
-        //          return View();
-        //      }
-
-        //      [HttpPost]
-        //      public ActionResult ThemNhaCungCap(NhaCungCap m)
-        //      {
-        //          if (!ModelState.IsValid)
-        //          {
-        //              //
-        //              return View(m);
-        //          }
-
-        //          m.MaSo = Guid.NewGuid();
-
-        //          Db.NhaCungCap.Add(m);
-        //          Db.SaveChanges();
-
-        //          TempData["Message"] = $"Thêm thành công {m.Ten}";
-        //          return RedirectToAction("NhaCungCap");
-        //      }
-
-        //      public ActionResult Coupon()
-        //      {
-        //          throw new NotImplementedException();
-        //      }
     }
 }

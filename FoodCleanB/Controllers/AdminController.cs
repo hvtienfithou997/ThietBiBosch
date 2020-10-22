@@ -1,5 +1,6 @@
 ﻿using OfficeOpenXml;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
@@ -278,10 +279,61 @@ namespace ThietBiBosch.Controllers
             return RedirectToAction("NhanVien");
         }
 
-        public ActionResult PhieuNhapKho()
+        public ActionResult PhieuNhapKho(DateTime? searchFrom, DateTime? searchTo, string maNhanVien)
         {
-            var phieuNhap = db.PhieuNhaps.ToList();
-            return View(phieuNhap);
+            ViewBag.NhanVien = db.NhanViens.ToList();
+            var nhanVien = db.NhanViens.ToDictionary(x => x.MaNhanVien, y => y.TenNhanVien);
+            string tenNv = string.Empty;
+            List<PhieuNhap> phieu = new List<PhieuNhap>();
+            if (searchFrom.HasValue && searchTo.HasValue)
+            {
+                foreach (var item in db.PhieuNhaps.Where(x => x.NgayNhap >= searchFrom && x.NgayNhap <= searchTo).ToList())
+                {
+                    foreach (var nv in nhanVien)
+                    {
+                        if (item.MaNhanVien == nv.Key)
+                        {
+                            tenNv = nv.Value;
+                        }
+                    }
+                    item.MaNhanVien = tenNv;
+                    phieu.Add(item);
+                }
+                return View(phieu);
+            }
+            if (!string.IsNullOrEmpty(maNhanVien))
+            {
+                foreach (var item in db.PhieuNhaps.Where(x => x.MaNhanVien == maNhanVien).ToList())
+                {
+                    foreach (var nv in nhanVien)
+                    {
+                        if (item.MaNhanVien == nv.Key)
+                        {
+                            tenNv = nv.Value;
+                        }
+                    }
+                    item.MaNhanVien = tenNv;
+                    phieu.Add(item);
+                }
+                return View(phieu);
+            }
+            else
+            {
+                foreach (var item in db.PhieuNhaps.ToList())
+                {
+                    foreach (var nv in nhanVien)
+                    {
+                        if (item.MaNhanVien == nv.Key)
+                        {
+                            tenNv = nv.Value;
+                        }
+                    }
+                    item.MaNhanVien = tenNv;
+                    phieu.Add(item);
+                }
+
+                return View(phieu);
+            }
         }
 
         public ActionResult ThemPhieuNhap()
@@ -307,7 +359,32 @@ namespace ThietBiBosch.Controllers
             m.TenThietBi = db.ThietBis.Find(m.MaThietBi)?.TenThietBi;
             db.PhieuNhaps.Add(m);
             db.SaveChanges();
+            //ChiTietPhieuNhap ctpn = new ChiTietPhieuNhap();
+
+            //ctpn.MaPhieuNhap = m.MaPhieuNhap;
+            //ctpn.id = Guid.NewGuid().ToString();
+            //ctpn.DonGiaNhap = Convert.ToInt32(m.DonGia);
+            //ctpn.SoLuongNhap = m.SoLuong;
+            //ctpn.MaThietBi = m.MaThietBi;
+
+            //db.ChiTietPhieuNhaps.Add(ctpn);
+
             TempData["Message"] = $"Thêm thành công {m.MaPhieuNhap}";
+            return RedirectToAction("PhieuNhapKho");
+        }
+
+        public ActionResult DetailPhieuNhap(string id)
+        {
+            var phieuNhap = db.PhieuNhaps.FirstOrDefault(x => x.MaPhieuNhap == id);
+            return View(phieuNhap);
+        }
+
+        [HttpPost]
+        public ActionResult DeletePhieuNhap(string id)
+        {
+            var phieuNhap = db.PhieuNhaps.FirstOrDefault(x => x.MaPhieuNhap == id);
+            db.PhieuNhaps.Remove(phieuNhap);
+            db.SaveChanges();
             return RedirectToAction("PhieuNhapKho");
         }
 

@@ -1,0 +1,83 @@
+﻿@model ThietBiBosch.Database.PhieuNhap
+
+@{
+    ViewBag.Title = "DetailPhieuNhap";
+    Layout = "~/Views/Shared/LayoutShare.cshtml";
+}
+
+<h2>Chi tiết phiếu nhập kho</h2>
+
+<div>
+    <h4>Phiếu nhập kho</h4>
+    <hr />
+    <dl class="dl-horizontal row">
+        <dt class="col-sm-5">
+            @Html.DisplayNameFor(model => model.MaPhieuNhap)
+        </dt>
+
+        <dd class="col-sm-7">
+            @Html.DisplayFor(model => model.MaPhieuNhap)
+        </dd>
+
+        <dt class="col-sm-5">
+            @Html.DisplayNameFor(model => model.NgayNhap)
+        </dt>
+
+        <dd class="col-sm-7">
+            @Html.DisplayFor(model => model.NgayNhap)
+        </dd>
+
+        <dt class="col-sm-5">
+            @Html.DisplayNameFor(model => model.MaNhanVien)
+        </dt>
+
+        <dd class="col-sm-7">
+            @Html.DisplayFor(model => model.MaNhanVien)
+        </dd>
+
+        <dt class="col-sm-5">
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </dt>
+
+        <dd class="col-sm-7">
+            @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+
+        <dt class="col-sm-5">
+            @Html.DisplayNameFor(model => model.DonGia)
+        </dt>
+
+        <dd class="col-sm-7">
+            @Html.DisplayFor(model => model.DonGia)
+        </dd>
+
+        <dt class="col-sm-5">
+            @Html.DisplayNameFor(model => model.MaThietBi)
+        </dt>
+
+        <dd class="col-sm-7">
+            @Html.DisplayFor(model => model.MaThietBi)
+        </dd>
+
+        <dt class="col-sm-5">
+            @Html.DisplayNameFor(model => model.TenThietBi)
+        </dt>
+
+        <dd class="col-sm-7">
+            @Html.DisplayFor(model => model.TenThietBi)
+        </dd>
+
+        <dt class="col-sm-5">
+            @Html.DisplayNameFor(model => model.DonViTinh)
+        </dt>
+
+        <dd class="col-sm-7">
+            @Html.DisplayFor(model => model.DonViTinh)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

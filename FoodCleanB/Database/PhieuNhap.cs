@@ -11,11 +11,12 @@ namespace ThietBiBosch.Database
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class PhieuNhap
     {
         public string MaPhieuNhap { get; set; }
-        public Nullable<System.DateTime> NgayNhap { get; set; }
+        public Nullable<System.DateTime> NgayNhap { get; set; }        
         public string MaNhanVien { get; set; }
         public string SoLuong { get; set; }
         public string DonGia { get; set; }

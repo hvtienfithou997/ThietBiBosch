@@ -406,6 +406,7 @@
     <Content Include="Views\Admin\ThemNhanVien.cshtml" />
     <Content Include="Views\Admin\EditNhanVien.cshtml" />
     <Content Include="Views\Admin\ThemPhieuNhap.cshtml" />
+    <Content Include="Views\Admin\DetailPhieuNhap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

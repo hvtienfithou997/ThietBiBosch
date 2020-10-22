@@ -1,10 +1,11 @@
-﻿using ThietBiBosch.Database;
-using ThietBiBosch.Helpers;
+﻿using OfficeOpenXml;
 using System;
 using System.Data.Entity;
+using System.Drawing;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Web.Mvc;
+using ThietBiBosch.Database;
+using ThietBiBosch.Helpers;
 
 namespace ThietBiBosch.Controllers
 {
@@ -285,6 +286,59 @@ namespace ThietBiBosch.Controllers
 
         public ActionResult PhieuNhapKho()
         {
+            return View();
+        }
+
+        public ActionResult XuatExcel()
+        {
+            var thietBi = db.ThietBis.ToList();
+
+            ExcelPackage pck = new ExcelPackage();
+            ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Report");
+
+            ws.Cells["A1"].Value = "THỐNG KÊ THIẾT BỊ";
+            ws.Cells["B1"].Value = "THÔNG TIN";
+
+            ws.Cells["A2"].Value = "Report";
+            ws.Cells["B2"].Value = "Report1";
+
+            ws.Cells["A3"].Value = "Date";
+            ws.Cells["B3"].Value = string.Format("{0:dd MMMM yyyy} at {0:H: mm tt}", DateTimeOffset.Now);
+
+            ws.Cells["A6"].Value = "MaThietBi";
+            ws.Cells["B6"].Value = "TenThietBi";
+            ws.Cells["C6"].Value = "GiaThanh";
+            ws.Cells["D6"].Value = "SoLuong";
+            ws.Cells["E6"].Value = "KhoiLuong";
+            ws.Cells["F6"].Value = "ThanhTien";
+
+            int rowStart = 7;
+            ws.Cells[string.Format("A{0}", rowStart + thietBi.Count + 1)].Value = "TongSo";
+            foreach (var item in thietBi)
+            {
+                ws.Row(rowStart).Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                ws.Row(rowStart).Style.Fill.BackgroundColor.SetColor(ColorTranslator.FromHtml(string.Format("pink")));
+
+                ws.Cells[string.Format("A{0}", rowStart)].Value = item.MaThietBi;
+                ws.Cells[string.Format("B{0}", rowStart)].Value = item.TenThietBi;
+                ws.Cells[string.Format("C{0}", rowStart)].Value = item.GiaThanh;
+                ws.Cells[string.Format("D{0}", rowStart)].Value = item.SoLuong;
+                ws.Cells[string.Format("E{0}", rowStart)].Value = item.KhoiLuong;
+                ws.Cells[string.Format("F{0}", rowStart)].Value = item.GiaThanh * item.SoLuong;
+                rowStart++;
+            }
+
+            ws.Cells[string.Format("C{0}", rowStart + 1)].Value = thietBi.Sum(x => x.GiaThanh);
+            ws.Cells[string.Format("D{0}", rowStart + 1)].Value = thietBi.Sum(x => x.SoLuong);
+            ws.Cells[string.Format("E{0}", rowStart + 1)].Value = thietBi.Sum(x => x.KhoiLuong);
+            ws.Cells[string.Format("F{0}", rowStart + 1)].Value = thietBi.Sum(x => x.SoLuong * x.GiaThanh);
+            ws.Cells["A:AZ"].AutoFitColumns();
+            Response.Clear();
+            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            Response.AddHeader("content-disposition", "attachment: filename=" + "ThongKeThietBi.xlsx");
+            Response.BinaryWrite(pck.GetAsByteArray());
+            Response.End();
+
             return View();
         }
 

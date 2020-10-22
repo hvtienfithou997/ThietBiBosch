@@ -97,3 +97,5 @@ C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\obj\Debug\ThietBiBosch.csproj.CoreC
 C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\obj\Debug\ThietBiBosch.csproj.CopyComplete
 C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\obj\Debug\FoodCleanB.dll
 C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\obj\Debug\FoodCleanB.pdb
+C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\bin\EPPlus.dll
+C:\Users\Tien Hoang\Desktop\Bosch\FoodCleanB\bin\EPPlus.xml

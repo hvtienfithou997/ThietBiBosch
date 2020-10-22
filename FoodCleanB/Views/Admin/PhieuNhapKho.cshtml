@@ -6,8 +6,57 @@
 }
 
 <h2>Phiếu nhập kho</h2>
+@Html.ActionLink("Thêm mới", "ThemPhieuNhap", null, new { @type = "button", @class = "btn btn-info" })
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MaPhieuNhap)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TenThietBi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DonGia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaNhanVien)
+        </th>
+        <th>
+            Thành Tiền
+        </th>
+        <th></th>
+    </tr>
 
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaPhieuNhap)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenThietBi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DonGia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaNhanVien)
+            </td>
+            <td>
+                @(Convert.ToInt32(item.SoLuong) * Convert.ToInt32(item.DonGia))
+            </td>
+            <td>                
+                @Html.ActionLink("Xóa", "Xóa Phiếu", new { MaHang = item.MaThietBi }, new { @class = "btn btn-danger", @type = "button" })
+            </td>
+        </tr>
 
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    }
+</table>
+@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+@Html.ActionLink("Back to List", "Index")

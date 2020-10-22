@@ -81,7 +81,7 @@ namespace ThietBiBosch.Controllers
         public ActionResult ThemSanPham()
         {
             ViewBag.DMTB = db.DanhMucThietBis.Select(o => new SelectListItem { Value = o.MaDMTB, Text = o.TenDMTB }).ToList();
-            
+
             return View();
         }
 
@@ -282,6 +282,33 @@ namespace ThietBiBosch.Controllers
         {
             var phieuNhap = db.PhieuNhaps.ToList();
             return View(phieuNhap);
+        }
+
+        public ActionResult ThemPhieuNhap()
+        {
+            ViewBag.NhanVien = db.NhanViens.Select(o => new SelectListItem { Value = o.MaNhanVien, Text = o.TenNhanVien }).ToList();
+            ViewBag.ThietBi = db.ThietBis.Select(o => new SelectListItem { Value = o.MaThietBi, Text = o.TenThietBi }).ToList();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ThemPhieuNhap(PhieuNhap m)
+        {
+            if (m == null || !ModelState.IsValid)
+            {
+                ViewBag.NhanVien = db.NhanViens.Select(o => new SelectListItem { Value = o.MaNhanVien, Text = o.TenNhanVien }).ToList();
+                ViewBag.ThietBi = db.ThietBis.Select(o => new SelectListItem { Value = o.MaThietBi, Text = o.TenThietBi }).ToList();
+
+                return View(m);
+            }
+
+            m.MaPhieuNhap = Guid.NewGuid().ToString();
+            m.NgayNhap = DateTime.Now;
+            m.TenThietBi = db.ThietBis.Find(m.MaThietBi)?.TenThietBi;
+            db.PhieuNhaps.Add(m);
+            db.SaveChanges();
+            TempData["Message"] = $"Thêm thành công {m.MaPhieuNhap}";
+            return RedirectToAction("PhieuNhapKho");
         }
 
         public ActionResult XuatExcel()
